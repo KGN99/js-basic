@@ -18,3 +18,8 @@
 
 - Object.keys() : 객체의 key만을 배열로 반환
 - Object.values() : 객체의 value만을 가져와 배열로 반환
+
+### DOM(Document Object Model)
+
+- DOM : 브라우저가 HTML 문서를 파싱하는 과정에서 생겨나는 객체
+- 트리노드
