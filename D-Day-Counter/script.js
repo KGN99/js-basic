@@ -1,5 +1,6 @@
 const messageContainer = document.querySelector("#d-day-message");
 const container = document.querySelector("#d-day-container");
+const savedDate = localStorage.getItem("saved-date");
 
 const intervalIdArr = [];
 
@@ -17,19 +18,20 @@ const dateFormMarker = function () {
 };
 
 const countMaker = function (data) {
+  if (data !== savedDate) {
+    localStorage.setItem("saved-date", data);
+  }
   const nowDate = new Date();
   const targetDate = new Date(data).setHours(0, 0, 0, 0);
   const remaining = (targetDate - nowDate) / 1000;
   if (remaining <= 0) {
     setClearInterval();
-    console.log("타이머가 종료 되었습니다.");
     messageContainer.innerHTML = "<h3>타이머가 종료 되었습니다.</h3>";
     container.style.display = "none";
     messageContainer.style.display = "flex";
     return;
   } else if (isNaN(remaining)) {
     setClearInterval();
-    console.log("유효한 시간대가 아닙니다.");
     messageContainer.innerHTML = "<h3>유효한 시간대가 아닙니다.</h3>";
     container.style.display = "none";
     messageContainer.style.display = "flex";
@@ -62,8 +64,11 @@ const countMaker = function (data) {
   }
 };
 
-const starter = () => {
-  const targetDataInput = dateFormMarker();
+const starter = (targetDataInput) => {
+  if (!targetDataInput) {
+    targetDataInput = dateFormMarker();
+  }
+
   container.style.display = "flex";
   messageContainer.style.display = "none";
   setClearInterval();
@@ -73,6 +78,7 @@ const starter = () => {
 };
 
 const setClearInterval = () => {
+  localStorage.removeItem("saved-date");
   for (let id of intervalIdArr) {
     clearInterval(id);
   }
@@ -83,3 +89,10 @@ const resetTimer = () => {
   messageContainer.style.display = "flex";
   setClearInterval();
 };
+
+if (savedDate) {
+  starter(savedDate);
+} else {
+  messageContainer.innerHTML = "<h3>D-Day를 입력해 주세요.</h3>";
+  container.style.display = "none";
+}
