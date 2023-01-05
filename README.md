@@ -23,3 +23,14 @@
 
 - DOM : 브라우저가 HTML 문서를 파싱하는 과정에서 생겨나는 객체
 - 트리노드
+- document.querySelector() : HTML 태그 찾아서 불러오기
+- document.createElement() : HTML 태그 추가
+- document.createElement("li").appendChild : li 태그 생성 후 요소 추가
+- document.createElement("li").addEventListener("click",()=>{}) : li 태그 생성 후 클릭 이벤트 리스터 설정
+
+### 스코프
+
+- 스코프 : 변수가 참조 될 수 있는 유효범위
+- 전역 스코프 : 전역 변수
+- 지역 스코프 : 지역 변수 ex) 함수 안 변수, 조건문 / 반복문 내부 변수
+- 스코프 체이닝 : 로컬 -> 스크립트 -> 글로벌 순으로 변수가 존재하는지 확인하는 과정
